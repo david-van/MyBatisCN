@@ -16,6 +16,7 @@
 package org.apache.ibatis.binding;
 
 import static com.googlecode.catchexception.apis.BDDCatchException.*;
+import static org.apache.ibatis.BaseDataTest.BLOG_PROPERTIES;
 import static org.assertj.core.api.BDDAssertions.then;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -62,9 +63,10 @@ class BindingTest {
 
   @BeforeAll
   static void setup() throws Exception {
-    DataSource dataSource = BaseDataTest.createBlogDataSource();
-    BaseDataTest.runScript(dataSource, BaseDataTest.BLOG_DDL);
-    BaseDataTest.runScript(dataSource, BaseDataTest.BLOG_DATA);
+//    DataSource dataSource = BaseDataTest.createBlogDataSource();
+//    BaseDataTest.runScript(dataSource, BaseDataTest.BLOG_DDL);
+//    BaseDataTest.runScript(dataSource, BaseDataTest.BLOG_DATA);
+    DataSource dataSource = BaseDataTest.createUnpooledDataSource(BLOG_PROPERTIES);
     TransactionFactory transactionFactory = new JdbcTransactionFactory();
     Environment environment = new Environment("Production", transactionFactory, dataSource);
     Configuration configuration = new Configuration(environment);

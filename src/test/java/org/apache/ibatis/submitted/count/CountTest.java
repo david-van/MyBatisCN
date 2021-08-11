@@ -46,6 +46,7 @@ class CountTest {
     try (SqlSession sqlSession = sqlSessionFactory.openSession()) {
       CountMapper mapper = sqlSession.getMapper(CountMapper.class);
       int answer = mapper.count();
+      int answer2 = mapper.count();
       assertEquals(6, answer);
     }
   }

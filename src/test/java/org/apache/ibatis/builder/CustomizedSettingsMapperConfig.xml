@@ -89,7 +89,13 @@
       <transactionManager type="JDBC">
         <property name="" value=""/>
       </transactionManager>
-      <dataSource type="UNPOOLED">
+<!--      <dataSource type="UNPOOLED">-->
+<!--        <property name="driver" value="${driver}"/>-->
+<!--        <property name="url" value="${url}"/>-->
+<!--        <property name="username" value="${username}"/>-->
+<!--        <property name="password" value="${password}"/>-->
+<!--      </dataSource>-->
+      <dataSource type="">
         <property name="driver" value="${driver}"/>
         <property name="url" value="${url}"/>
         <property name="username" value="${username}"/>

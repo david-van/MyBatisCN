@@ -58,6 +58,8 @@ import org.apache.ibatis.type.TypeHandler;
 import org.apache.ibatis.type.TypeHandlerRegistry;
 import org.junit.jupiter.api.Test;
 
+import javax.sql.DataSource;
+
 import static com.googlecode.catchexception.apis.BDDCatchException.*;
 import static org.assertj.core.api.BDDAssertions.then;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -219,6 +221,7 @@ class XmlConfigBuilderTest {
 
       Environment environment = config.getEnvironment();
       assertThat(environment.getId()).isEqualTo("development");
+      DataSource dataSource = environment.getDataSource();
       assertThat(environment.getDataSource()).isInstanceOf(UnpooledDataSource.class);
       assertThat(environment.getTransactionFactory()).isInstanceOf(JdbcTransactionFactory.class);
 

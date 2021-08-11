@@ -19,6 +19,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import net.sf.cglib.core.DebuggingClassWriter;
 import net.sf.cglib.proxy.Factory;
 
 import org.apache.ibatis.domain.blog.Author;
@@ -39,6 +40,13 @@ class CglibProxyTest extends SerializableProxyTest {
     proxyFactory = new CglibProxyFactory();
   }
 
+  @Test
+  void shouldSerializeAProxyForABeanWithDefaultConstructor() throws Exception {
+    System.setProperty(DebuggingClassWriter.DEBUG_LOCATION_PROPERTY, "c:\\\\classes");
+    Object proxy = proxyFactory.createProxy(author, new ResultLoaderMap(), new Configuration(), new DefaultObjectFactory(), new ArrayList<>(), new ArrayList<>());
+    Object proxy2 = deserialize(serialize((Serializable) proxy));
+    assertEquals(author, proxy2);
+  }
   @Test
   void shouldCreateAProxyForAPartiallyLoadedBean() throws Exception {
     ResultLoaderMap loader = new ResultLoaderMap();

@@ -97,6 +97,7 @@ public final class LogFactory {
       try {
         runnable.run();
       } catch (Throwable t) {
+        t.printStackTrace();
         // ignore
       }
     }

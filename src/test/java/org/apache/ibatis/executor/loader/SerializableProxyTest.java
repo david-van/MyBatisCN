@@ -27,6 +27,8 @@ import java.io.ObjectStreamException;
 import java.io.Serializable;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+
+import net.sf.cglib.core.DebuggingClassWriter;
 import org.apache.ibatis.domain.blog.Author;
 import org.apache.ibatis.domain.blog.Section;
 import org.apache.ibatis.executor.ExecutorException;
@@ -53,6 +55,7 @@ public abstract class SerializableProxyTest {
 
   @Test
   void shouldSerializeAProxyForABeanWithDefaultConstructor() throws Exception {
+    System.setProperty(DebuggingClassWriter.DEBUG_LOCATION_PROPERTY, "C:\\Users\\fanzunying");
     Object proxy = proxyFactory.createProxy(author, new ResultLoaderMap(), new Configuration(), new DefaultObjectFactory(), new ArrayList<>(), new ArrayList<>());
     Object proxy2 = deserialize(serialize((Serializable) proxy));
     assertEquals(author, proxy2);
