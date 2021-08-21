@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.david.mybatis.dal.UserMapper">
+
+    <insert id="insertUser">
+        INSERT INTO t_user (`name`, age, rest_day)
+        VALUES(#{name}, #{age}, #{restDay})
+    </insert>
+
+    <select id="selectUserById" resultType="com.david.mybatis.dal.UserEntity">
+        SELECT *
+        FROM t_user
+        WHERE id = #{id}
+    </select>
+</mapper>
