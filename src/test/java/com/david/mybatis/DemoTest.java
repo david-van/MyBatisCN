@@ -14,6 +14,7 @@ import org.apache.ibatis.transaction.TransactionFactory;
 import org.apache.ibatis.transaction.jdbc.JdbcTransactionFactory;
 
 import javax.sql.DataSource;
+import java.util.List;
 import java.util.Properties;
 
 /**
@@ -25,13 +26,15 @@ public class DemoTest {
         //使用new 方式
         PooledDataSource source = new PooledDataSource();
         source.setDriver("com.mysql.cj.jdbc.Driver");
-        source.setUrl("jdbc:mysql://localhost:3306/test_demo?useUnicode=true&characterEncoding=utf-8&useSSL=false&allowMultiQueries=true");
+        source.setUrl("jdbc:mysql://localhost:3306/test_demo?useUnicode=true&characterEncoding=utf-8&allowPublicKeyRetrieval=true&useSSL=false&allowMultiQueries=true");
         source.setUsername("root");
         source.setPassword("Fzy@130725");
+//        source.setAllowPublicKeyRetrieval(true);
+//        source.setUseSSL(false);
         //使用工厂方式，mybatis通过配置文件解析，使用工厂方式创建连接池
         PooledDataSourceFactory factory = new PooledDataSourceFactory();
         Properties properties = new Properties();
-        properties.setProperty("url", "jdbc:mysql://localhost:3306/test_demo?useUnicode=true&characterEncoding=utf-8&useSSL=false&allowMultiQueries=true");
+        properties.setProperty("url", "jdbc:mysql://localhost:3306/test_demo?useUnicode=true&characterEncoding=utf-8&allowPublicKeyRetrieval=true&useSSL=false&allowMultiQueries=true");
         properties.setProperty("username", "root");
         properties.setProperty("password", "Fzy@130725");
         properties.setProperty("driver", "com.mysql.cj.jdbc.Driver");
@@ -53,6 +56,8 @@ public class DemoTest {
 
         SqlSession sqlSession = sqlSessionFactory.openSession();
         UserMapper mapper = sqlSession.getMapper(UserMapper.class);
+        List<UserEntity> all = mapper.selectAll();
+        System.out.println("all = " + all);
         UserEntity userEntity = mapper.selectUserById((long) 1);
         System.out.println("userEntity = " + userEntity);
 
